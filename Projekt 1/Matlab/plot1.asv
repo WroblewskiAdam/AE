@@ -1,0 +1,17 @@
+function stop = plot1(x, optimValues, state)
+[X,Y] = meshgrid(-10:0.2:10, -10:0.2:10);
+Z = (-X-0.5).^2 + 100*(Y+1-(X+1.5).^2).^2;
+surf(X,Y,Z);
+hold on;
+grid on;
+
+
+plot3(x(1), x(2), (-x-0.5)^2 + 100*(y+1-(x+1.5)^2)^2;, '.' ,'Color', 'yellow', 'MarkerSize', 20);
+xlabel('x');
+ylabel('y');
+zlabel('z');
+
+
+
+stop = false;
+end
