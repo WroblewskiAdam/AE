@@ -1,0 +1,29 @@
+clear;
+clc;
+global min_vector;
+global mean_vector;
+global max_vector;
+global var_vector;
+
+items = Skrypt1();
+maxWeight = 0.3*sum(items(:,1));
+N = 32;
+
+options = optimoptions('ga', ...
+    'CrossoverFraction', 0.8, ...
+    'Display','iter', ...
+    'EliteCount',1, ...
+    'SelectionFcn','selectionroulette', ...
+    'MaxGenerations',3200, ...
+    'MaxStallGenerations',50, ...
+    'MutationFcn', {@mutationuniform, 0.01}, ...
+    'PopulationSize',2000,...
+    'OutputFcn',@GaOutputFcn);
+intcon= (1:1:32);
+lb = zeros(1,N);
+ub = ones(1,N);
+solution = ga(@(solution) BackpackFcn(solution, items, maxWeight), N, [], [], [], [], lb, ub, [], intcon, options);
+plotEverything()
+
+
+
