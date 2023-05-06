@@ -16,22 +16,22 @@ glob_iter = 0;
 means = [];
 % pop_sizes = [20, 100, 1000,  10000 ];
 % selections = {'selectionroulette', 'selectiontournament'};
-% crossovers_vals = [0.2, 0.5, 0.8];
+crossovers_vals = [0.2, 0.]
 
 items = Skrypt1();
 maxWeight = 0.3*sum(items(:,1));
 N = 32;
-% for n = 1:length(crossovers_vals)
+for n = 1:length(selections)
 	% for glob_iter = 1:30
 		options = optimoptions('ga', ...
     		'CrossoverFraction', 0.8, ...
     		'Display','iter', ...
     		'EliteCount',1, ...
-    		'SelectionFcn','selectiontournament', ...
+    		'SelectionFcn',selections(n), ...
     		'MaxGenerations',100000, ...
     		'MaxStallGenerations',100000, ...
     		'MutationFcn', {@mutationuniform, 0.2}, ...
-    		'PopulationSize',20000,...
+    		'PopulationSize',100,...
     		'OutputFcn',@GaOutputFcn);
 		intcon= (1:1:32);
 		lb = zeros(1,N);
@@ -46,10 +46,10 @@ N = 32;
 	% srednia_generacji = mean(results(:,1))
 	% srednia_f_cel = mean(results(:,2))
 
-	% means(n,1) = crossovers_vals(n);
+	% % means(n,1) = selections(n);
 	% means(n,2) = srednia_generacji;
 	% means(n,3) = srednia_f_cel;
-% end
+end
 % plotEverything();
 
 

@@ -1,0 +1,26 @@
+function [state,options,optchanged] = GaOutputFcn(options,state,flag)
+	global min_vector;
+	global mean_vector;
+	global max_vector;
+	global var_vector;
+	
+	global results;
+	global glob_iter;
+
+	optchanged = false;
+	
+	iteration = state.Generation + 1;
+	min_vector(iteration,) = min( - state.Score);
+	mean_vector(iteration) = mean( - state.Score);
+	max_vector(iteration) = max( - state.Score);
+	var_vector(iteration) = var(- state.Score);
+	
+	if min(state.Best) ==  -981
+		results(glob_iter, 1) = state.Generation;
+		results(glob_iter, 2) = state.FunEval;
+		state.StopFlag = 'stop';
+	end
+
+end
+
+
